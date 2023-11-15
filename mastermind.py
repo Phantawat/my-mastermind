@@ -26,8 +26,8 @@ class Mastermind:
 
     def generate_sample(self):
         sample = ''
-        for i in range(1, 5):
-            sample += str(random.randint(1, 8))
+        for i in range(1, self.__positions + 1):
+            sample += str(random.randint(1, self.__colors))
         return sample
 
     def play(self):
@@ -41,7 +41,6 @@ class Mastermind:
                 break
             self.attempt += 1
             self.guess = input('What is your guess?: ')
-            print(self.sample)
         print(f'You solve it after {self.attempt} rounds')
         print('Congrats, you are clever as Conan!')
 
@@ -64,4 +63,5 @@ class Mastermind:
 if __name__ == '__main__':
     mastermind = Mastermind(6, 4)
     mastermind.play()
+
 
