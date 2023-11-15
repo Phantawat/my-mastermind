@@ -36,19 +36,22 @@ class Mastermind:
             hint = self.check_ans()
             print(f'Your guess is {self.guess}')
             print(hint)
-            print(self.sample)
             if hint == '*' * self.__positions:
                 break
             self.guess = input('What is your guess?: ')
+        print('Congrats, you are clever as Conan!')
 
     def check_ans(self):
-        hint = ''
+        hint1 = ''
+        hint2 = ''
         for j, i in enumerate(self.sample):
-            if self.guess[j] == self.sample[j]:
-                hint += '*'
+            if self.guess[j] == i:
+                hint1 += '*'
+                self.sample.replace(i, '.')
             elif self.guess[j] in self.sample:
-                hint += 'o'
-        return hint
+                hint2 += 'o'
+                self.sample.replace(i, '.')
+        return hint1 + hint2
 
 
 if __name__ == '__main__':
