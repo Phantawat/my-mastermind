@@ -47,21 +47,23 @@ class Mastermind:
     def check_ans(self):
         hint1 = ''
         hint2 = ''
-        temp_sample = self.sample  # Create a temporary variable to store the modified sample
+        temp_sample = self.sample
 
         for j, i in enumerate(self.sample):
             if self.guess[j] == i:
                 hint1 += '*'
-                temp_sample = temp_sample[:j] + '.' + temp_sample[j + 1:]  # Replace the character in temp_sample
+                temp_sample = temp_sample[:j] + '.' + temp_sample[j + 1:]
             elif self.guess[j] in temp_sample:
                 hint2 += 'o'
-                temp_sample = temp_sample.replace(self.guess[j], '.', 1)  # Replace the first occurrence only
+                temp_sample = temp_sample.replace(self.guess[j], '.', 1)
 
         return hint1 + hint2
 
 
 if __name__ == '__main__':
-    mastermind = Mastermind(6, 4)
-    mastermind.play()
-
-
+    while True:
+        mastermind = Mastermind(6, 4)
+        mastermind.play()
+        con_or_pause = int(input('Press 1 if you wanna play again 0 to quit: '))
+        if con_or_pause == 0:
+            break
