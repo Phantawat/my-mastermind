@@ -6,6 +6,7 @@ class Mastermind:
         self.__colors = x
         self.__positions = y
         self.sample = self.generate_sample()
+        self.attempt = 1
 
     @property
     def colors(self):
@@ -38,19 +39,25 @@ class Mastermind:
             print(hint)
             if hint == '*' * self.__positions:
                 break
+            self.attempt += 1
             self.guess = input('What is your guess?: ')
+            print(self.sample)
+        print(f'You solve it after {self.attempt} rounds')
         print('Congrats, you are clever as Conan!')
 
     def check_ans(self):
         hint1 = ''
         hint2 = ''
+        temp_sample = self.sample  # Create a temporary variable to store the modified sample
+
         for j, i in enumerate(self.sample):
             if self.guess[j] == i:
                 hint1 += '*'
-                self.sample.replace(i, '.')
-            elif self.guess[j] in self.sample:
+                temp_sample = temp_sample[:j] + '.' + temp_sample[j + 1:]  # Replace the character in temp_sample
+            elif self.guess[j] in temp_sample:
                 hint2 += 'o'
-                self.sample.replace(i, '.')
+                temp_sample = temp_sample.replace(self.guess[j], '.', 1)  # Replace the first occurrence only
+
         return hint1 + hint2
 
 
